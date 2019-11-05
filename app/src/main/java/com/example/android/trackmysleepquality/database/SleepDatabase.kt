@@ -16,7 +16,9 @@
 
 package com.example.android.trackmysleepquality.database
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 
         //list the tables              //schema version       //saves the schema to a folder that shows version history for the database
@@ -31,5 +33,25 @@ abstract class SleepDatabase : RoomDatabase(){
                 @Volatile   //ensures value of INSTANCE is always up to date
                 private var INSTANCE: SleepDatabase? = null
                 //INSTANCE keeps reference to the database so we dont have to keep reconnecting to the database
+
+                fun getInstance(context: Context): SleepDatabase {
+
+                    //prevents multiple threads from asking for a database instance at the same time
+                    synchronized(this) {
+                        var instance = INSTANCE
+
+                        if (instance == null){
+                            instance = Room.databaseBuilder(    //create a database
+                                    context.applicationContext,SleepDatabase::class.java,
+                                    "sleep_history_database"
+                            )
+                                    //migration means updating information as the schema/version is updated
+                                    .fallbackToDestructiveMigration()
+                                    .build()
+                            INSTANCE = instance
+                        }
+                        return instance
+                    }
+                }
             }
         }
