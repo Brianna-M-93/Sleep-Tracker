@@ -18,6 +18,7 @@ package com.example.android.trackmysleepquality.database
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.Update
 
 //DAO = data access object
 @Dao
@@ -26,5 +27,6 @@ interface SleepDatabaseDao {
     @Insert
     fun insert(night: SleepNight)
 
-
+    @Update
+    fun update(night: SleepNight)
 }
