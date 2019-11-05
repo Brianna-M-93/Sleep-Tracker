@@ -21,4 +21,15 @@ import androidx.room.RoomDatabase
 
         //list the tables              //schema version       //saves the schema to a folder that shows version history for the database
 @Database(entities = [SleepNight::class], version = 1, exportSchema = false)    //true by default
-abstract class SleepDatabase : RoomDatabase(){}
+abstract class SleepDatabase : RoomDatabase(){
+            abstract val sleepDatabaseDao: SleepDatabaseDao //return SleepDatabase
+
+            //one table and one Dao for now
+
+            companion object {
+
+                @Volatile   //ensures value of INSTANCE is always up to date
+                private var INSTANCE: SleepDatabase? = null
+                //INSTANCE keeps reference to the database so we dont have to keep reconnecting to the database
+            }
+        }
