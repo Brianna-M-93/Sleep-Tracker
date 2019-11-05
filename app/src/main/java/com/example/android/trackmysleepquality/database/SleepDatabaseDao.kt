@@ -33,4 +33,9 @@ interface SleepDatabaseDao {
 
     @Query("SELECT * FROM daily_sleep_quality_table WHERE nightId = :key")
     fun get(key: Long): SleepNight? //nullable SleepNight
+
+    @Query("DELETE FROM daily_sleep_quality_table")     //delete all the rows from the table
+    fun clear()     //no arguments because we are deleting everything
+
+
 }
