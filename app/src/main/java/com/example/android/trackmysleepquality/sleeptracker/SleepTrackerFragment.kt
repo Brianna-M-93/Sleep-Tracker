@@ -60,6 +60,9 @@ class SleepTrackerFragment : Fragment() {
                 ViewModelProviders.of(
                     this, viewModelFactory).get(SleepTrackerViewModel::class.java)
 
+        //set variable in the sleep tracker layout
+        binding.sleepTrackerViewModel = sleepTrackerViewModel
+
         //set current activity as the lifecycle owner of the binding
         binding.setLifecycleOwner(this)
 
