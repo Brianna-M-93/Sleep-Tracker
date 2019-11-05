@@ -15,3 +15,11 @@
  */
 
 package com.example.android.trackmysleepquality.database
+
+data class SleepNight (
+        //var value can change, val is a constant
+        var nightId: Long = 0L,
+        val startTimeMilli: Long = System.currentTimeMillis(),
+        var endTimeMilli: Long = startTimeMilli,
+        var sleepQuality: Int = -1
+)
